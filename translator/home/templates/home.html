@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Translator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+  background:#0f172a;
+  overflow:hidden;
+}
+
+/* Animated Particles Background */
+body::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background: radial-gradient(circle,#22d3ee22 2px, transparent 3px);
+  background-size:40px 40px;
+  animation: moveBg 20s linear infinite;
+}
+
+@keyframes moveBg{
+  from{transform:translate(0,0);}
+  to{transform:translate(-200px,-200px);}
+}
+
+/* Main Card */
+.container{
+  position:relative;
+  width:900px;
+  padding:30px;
+  border-radius:20px;
+  background:#020617;
+  box-shadow:0 0 40px #22d3ee55;
+  color:white;
+  z-index:1;
+}
+
+/* Title */
+h1{
+  text-align:center;
+  margin-bottom:25px;
+  font-family:'Orbitron',sans-serif;
+  letter-spacing:2px;
+  color:#22d3ee;
+}
+
+/* Grid Layout */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+/* Input Boxes */
+.box{
+  position:relative;
+}
+
+textarea, select{
+  width:100%;
+  padding:15px;
+  border-radius:12px;
+  border:2px solid #22d3ee44;
+  background:#020617;
+  color:white;
+  outline:none;
+  transition:0.3s;
+}
+
+textarea:focus, select:focus{
+  border-color:#22d3ee;
+  box-shadow:0 0 10px #22d3ee88;
+}
+
+/* Floating Label */
+label{
+  position:absolute;
+  top:-10px;
+  left:15px;
+  background:#020617;
+  padding:0 5px;
+  font-size:13px;
+  color:#22d3ee;
+}
+
+/* Button */
+button{
+  width:100%;
+  margin-top:25px;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(90deg,#22d3ee,#a78bfa,#22d3ee);
+  background-size:200%;
+  animation: glow 3s linear infinite;
+  transition:0.3s;
+}
+
+@keyframes glow{
+  0%{background-position:0%;}
+  100%{background-position:200%;}
+}
+
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px #22d3ee;
+}
+
+/* Result */
+.result{
+  margin-top:20px;
+  padding:15px;
+  border-radius:12px;
+  background:#020617;
+  border:1px solid #22d3ee44;
+}
+
+.footer{
+  text-align:center;
+  margin-top:15px;
+  font-size:12px;
+  opacity:0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>⚡ AI TRANSLATOR</h1>
+
+<form method="post">
+{% csrf_token %}
+
+<div class="grid">
+
+<div class="box">
+<label>Input Text</label>
+<textarea name="user_input" rows="8" placeholder="Type something..."></textarea>
+</div>
+
+<div class="box">
+<label>Select Language</label>
+<select name="language">
+<option hidden>Choose Language</option>
+<option>Hindi</option>
+<option>Telugu</option>
+<option>Tamil</option>
+<option>Kannada</option>
+<option>Malayalam</option>
+<option>Punjabi</option>
+<option>Marathi</option>
+<option>Bengali</option>
+<option>Gujarati</option>
+<option>Odia</option>
+<option>Assamese</option>
+<option>Maithili</option>
+<option>Urdu</option>
+<option>Sinhala</option>
+<option>Nepali</option>
+</select>
+</div>
+
+</div>
+
+<button type="submit">🚀 Translate</button>
+
+</form>
+
+{% if response %}
+<div class="result">
+<h3>Translated Text</h3>
+<p>{{ response }}</p>
+</div>
+{% endif %}
+
+<div class="footer">
+Made with ❤️ using Django
+</div>
+
+</div>
+
+</body>
+</html>
